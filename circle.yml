@@ -6,3 +6,9 @@ machine:
     - rm -f jce_policy-8.zip
     - "curl -o jce_policy-8.zip -v -j -k -L -H 'Cookie: oraclelicense=accept-securebackup-cookie' http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip"
     - sudo unzip -j -o -d $JAVA_HOME/jre/lib/security jce_policy-8.zip
+test:
+  override:
+    - ./go build
+  post:
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+    - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
