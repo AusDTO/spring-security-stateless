@@ -1,0 +1,41 @@
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+agents
+build
+classes
+out
+projectFilesBackup*
+target
+tmp
+.DS_Store
+._.DS_Store
+.classpath
+.gradle
+.idea/
+.project
+.settings/
+*.ids
+*.iml
+*.ipr
+*.iws
+*.log
+*.swp
+
+node_modules/
+private/
+src/main/resources/templates/
+src/main/resources/public/
+
+monitoring/docker-compose-ecs.yml
+monitoring/docker-compose-ecs.ymle
