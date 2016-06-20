@@ -1,6 +1,6 @@
 # spring-security-stateless
 
-[![Release](https://jitpack.io/v/User/Repo.svg)](https://jitpack.io/#User/Repo)
+[![CircleCI](https://circleci.com/gh/AusDTO/spring-security-stateless.svg?style=svg)](https://circleci.com/gh/AusDTO/spring-security-stateless) [![Release](https://jitpack.io/v/AusDTO/spring-security-stateless.svg)](https://jitpack.io/#AusDTO/spring-security-stateless)
 
 Provides cookie-based implementations of SecurityContextRepository, CsrfTokenRepository, and RequestCache.
 
