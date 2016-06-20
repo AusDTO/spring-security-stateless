@@ -1,0 +1,7 @@
+server:
+  contextPath: /
+  port: ${port:8080}
+
+spring:
+  mustache:
+    suffix: .mustache

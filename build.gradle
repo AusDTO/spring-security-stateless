@@ -1,0 +1,99 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+def javaVersion = '1.8'
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+
+group = 'au.gov.dto'
+version = '1.0.0'
+
+sourceSets {
+    sampleapp {
+        java {
+            compileClasspath += main.output
+            runtimeClasspath += main.output
+        }
+    }
+}
+
+configurations {
+    sampleappCompile.extendsFrom compile
+    sampleappRuntime.extendsFrom runtime
+
+    all*.exclude group: 'org.apache.tomcat.embed'      // Use Jetty instead
+    all*.exclude module: 'spring-boot-starter-tomcat'  // Use Jetty instead
+}
+
+task run(type: JavaExec,
+        description: 'Runs the sample application.',
+        group: 'Application') {
+    classpath = sourceSets.sampleapp.runtimeClasspath
+    main = 'au.gov.dto.springframework.security.sample.Application'
+}
+
+jar {
+    manifest {
+        attributes 'Created-By': 'Digital Transformation Office',
+                'Implementation-Title': project.name,
+                'Implementation-Version': version
+    }
+}
+
+task sourcesJar(type: Jar,
+        dependsOn: classes,
+        description: 'Assembles a jar archive containing the Java source files.',
+        group: 'Build') {
+    from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar,
+        dependsOn: javadoc,
+        description: 'Assembles a jar archive containing the javadoc files.',
+        group: 'Build') {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            artifact sourcesJar {
+                classifier 'sources'
+            }
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.springframework.security:spring-security-web:3.2.0.RELEASE",
+            "com.fasterxml.jackson.core:jackson-databind:2.1.0",
+            "javax.servlet:javax.servlet-api:3.0.1",
+            "com.nimbusds:nimbus-jose-jwt:4.19"
+
+    sampleappCompile "org.springframework.boot:spring-boot-starter-security:1.3.5.RELEASE",
+            "org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE",
+            "org.springframework.boot:spring-boot-starter-jetty:1.3.5.RELEASE"
+
+    testCompile "junit:junit:4.12",
+            "org.hamcrest:hamcrest-library:1.3",
+            "org.springframework:spring-test:3.2.0.RELEASE"
+}
+
+task wrapper(type: Wrapper,
+        description: 'Create Gradle wrapper scripts.',
+        group: 'Build Setup') {
+    gradleVersion = '2.14'
+}
+
