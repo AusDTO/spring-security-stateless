@@ -26,8 +26,8 @@ import java.util.Collections;
 @Configuration
 class AppConfig {
     @Autowired
-    @Value("${session.jwt.encryption.key.base64}")
-    private String sessionJwtEncryptionKeyBase64;
+    @Value("${session.encryption.key.base64}")
+    private String sessionEncryptionKeyBase64;
 
     @Bean
     ServletContextInitializer noSessionTrackingServletContextInitializer() {
@@ -60,7 +60,7 @@ class AppConfig {
         SimpleModule module = new SimpleModule("usermodule");
         module.addDeserializer(User.class, new UserDeserializer());
         objectMapper.registerModule(module);
-        JwtUserDetailsSerializer jwtUserDetailsSerializer = new JwtUserDetailsSerializer(objectMapper, sessionJwtEncryptionKeyBase64);
+        JwtUserDetailsSerializer jwtUserDetailsSerializer = new JwtUserDetailsSerializer(objectMapper, sessionEncryptionKeyBase64);
         SecurityContextSerializer securityContextSerializer = new SecurityContextSerializer(jwtUserDetailsSerializer);
         return new CookieSecurityContextRepository(csrfTokenRepository, securityContextSerializer, User.class);
     }

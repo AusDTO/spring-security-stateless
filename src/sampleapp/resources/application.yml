@@ -1,7 +1,14 @@
 server:
   contextPath: /
-  port: ${port:8080}
+  port: ${port:8080}  # Use port 8080 unless PORT environment variable or port system property provided
 
 spring:
   mustache:
     suffix: .mustache
+
+# This is a dummy encryption key placed here to allow the sample application to
+# run without specifying additional environment variables or system properties.
+session:
+  encryption:
+    key:
+      base64: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
