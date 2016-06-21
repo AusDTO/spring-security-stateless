@@ -18,6 +18,6 @@ deployment:
       - gradle assemble
       - mkdir -p release
       - cp build/libs/* release/
-      - curl -O https://github.com/tcnksm/ghr/releases/download/v0.4.0/ghr_v0.4.0_linux_amd64.zip
-      - unzip ghr_v0.4.0_linux_amd64.zip
+      - curl -O https://github.com/tcnksm/ghr/releases/download/pre-release/linux_amd64.zip
+      - unzip linux_amd64.zip
       - ./ghr -t $GITHUB_ACCESS_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME $CIRCLE_TAG release/
