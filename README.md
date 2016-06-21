@@ -2,7 +2,21 @@
 
 [![CircleCI](https://circleci.com/gh/AusDTO/spring-security-stateless.svg?style=shield)](https://circleci.com/gh/AusDTO/spring-security-stateless) [![License](https://img.shields.io/github/license/AusDTO/spring-security-stateless.svg)](https://github.com/AusDTO/spring-security-stateless/blob/master/LICENSE) [![JitPack](https://jitpack.io/v/AusDTO/spring-security-stateless.svg)](https://jitpack.io/#AusDTO/spring-security-stateless)
 
-Provides cookie-based implementations of SecurityContextRepository, CsrfTokenRepository, and RequestCache.
+## tl;dr
+
+Use Spring Security for authentication in your JVM-based application without using HttpSession, eliminating server-side non-persistent user session state.
+
+## Explanation
+
+[HttpSession](http://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpSession.html) is standard way to maintain user state in server memory between requests in Java-based web applications. They are easy to use as long as certain precautions are taken, and many frameworks and libraries are based on using HttpSession. If your application takes care of its own authentication (rather than delegating to some access manager reverse proxy), it most likely uses HttpSession to track users' authentication state.
+
+From an operational point of view, using sessions in server memory is problematic since it typically means that each user is must be pegged to the application instance that maintains their session. This is typically implemented using "sticky sessions" or "session persistence" at the load balancer level based on the `JSESSIONID` cookie.
+
+Performing application deployments without disrupting end users becomes trickier even if techniques such as blue-green deployments are used. An instance can't be stopped until it no longer maintains any user sessions. Solutions exist, such as session replication or persisting user sessions in a database, but these have other drawbacks which means that operations are not necessarily simplified.
+
+This library allows you to use [Spring Security](http://projects.spring.io/spring-security/) for authentication without using HttpSession. Authentication state is kept in an encrypted and signed cookie instead. Specificially, this library provides cookie-based implementations of `SecurityContextRepository`, `CsrfTokenRepository`, and `RequestCache`. These can be used all together or independently.
+
+See the sample Spring Boot application in the `src/sampleapp` directory for an example of an application using all three implementations and not using HttpSession at all.
 
 ## Requirements
 
@@ -19,18 +33,16 @@ Check the Releases tab for the latest version.
 
 Add `https://jitpack.io` as a repository to your Gradle build file (likely `build.gradle`):
 
-    allprojects {
-        repositories {
-            ...
-            maven { url 'https://jitpack.io' }
-        }
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
     }
 
 Then add the dependency:
 
     dependencies {
         ...
-        compile 'com.github.AusDTO:spring-security-stateless:1.0.0'
+        compile 'com.github.AusDTO:spring-security-stateless:1.0.4'
     }
 
 ### Maven
@@ -50,7 +62,7 @@ Then add the dependency:
     <dependency>
         <groupId>com.github.AusDTO</groupId>
         <artifactId>spring-security-stateless</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.4</version>
     </dependency>
 
 ### sbt or Leiningen
@@ -60,3 +72,7 @@ See <https://jitpack.io/> for instructions
 ## How to use
 
 Instructions coming soon. In the meantime, see the example application in the directory `src/sampleapp`.
+
+### API documentation
+
+[Javadoc](https://jitpack.io/com/github/AusDTO/spring-security-stateless/v1.0.4/javadoc/index.html)
