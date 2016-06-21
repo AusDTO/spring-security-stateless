@@ -5,7 +5,7 @@ def javaVersion = '1.8'
 sourceCompatibility = javaVersion
 targetCompatibility = javaVersion
 
-group = 'au.gov.dto'
+group = 'com.github.AusDTO'
 version = 'git rev-parse --short=10 HEAD'.execute().getText().trim()
 def tag = System.env.CIRCLE_TAG
 if (tag) {
