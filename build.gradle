@@ -6,7 +6,11 @@ sourceCompatibility = javaVersion
 targetCompatibility = javaVersion
 
 group = 'au.gov.dto'
-version = '1.0.0'
+version = 'git rev-parse --short=10 HEAD'.execute().getText().trim()
+def tag = System.env.CIRCLE_TAG
+if (tag) {
+    version = tag
+}
 
 sourceSets {
     sampleapp {
@@ -34,9 +38,17 @@ task run(type: JavaExec,
 
 jar {
     manifest {
-        attributes 'Created-By': 'Digital Transformation Office',
-                'Implementation-Title': project.name,
-                'Implementation-Version': version
+        attributes 'Specification-Title': project.name,
+                'Specification-Version': "${System.env.CIRCLE_TAG}",
+                'Specification-Vendor': "${System.env.CIRCLE_PROJECT_USERNAME}",
+                'Implementation-Title': "${System.env.CIRCLE_PROJECT_REPONAME}",
+                'Implementation-Version': "${System.env.CIRCLE_SHA1}",
+                'Implementation-Vendor-Id': "com.github.${System.env.CIRCLE_PROJECT_USERNAME}",
+                'Implementation-Vendor': "${System.env.CIRCLE_PROJECT_USERNAME}",
+                'Implementation-URL': "${System.env.CIRCLE_REPOSITORY_URL}",
+                'Built-By': "${System.env.CIRCLE_USERNAME}",
+                'Build-URL': "${System.env.CIRCLE_BUILD_URL}",
+                'Build-Jdk': "${System.properties['java.version']}"
     }
 }
 
