@@ -10,3 +10,13 @@ test:
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+deployment:
+  gh-release:
+    tag: /^v\d+\.\d+\.\d+$/
+    owner: AusDTO
+    commands:
+      - mkdir -p release
+      - cp build/libs/* release/
+      - curl -O https://github.com/tcnksm/ghr/releases/download/v0.4.0/ghr_v0.4.0_linux_amd64.zip
+      - unzip ghr_v0.4.0_linux_amd64.zip
+      — ghr -t $GITHUB_ACCESS_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` release/
