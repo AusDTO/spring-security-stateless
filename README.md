@@ -1,6 +1,6 @@
 # spring-security-stateless
 
-[![CircleCI](https://img.shields.io/circleci/project/AusDTO/spring-security-stateless.svg?style=flat-square)](https://circleci.com/gh/AusDTO/spring-security-stateless) [![License](https://img.shields.io/github/license/AusDTO/spring-security-stateless.svg?style=flat-square)](https://github.com/AusDTO/spring-security-stateless/blob/master/LICENSE) [![JitPack](https://jitpack.io/v/AusDTO/spring-security-stateless.svg?style=flat-square)](https://jitpack.io/#AusDTO/spring-security-stateless)
+[![CircleCI](https://circleci.com/gh/AusDTO/spring-security-stateless.svg?style=shield)](https://circleci.com/gh/AusDTO/spring-security-stateless) [![License](https://img.shields.io/github/license/AusDTO/spring-security-stateless.svg)](https://github.com/AusDTO/spring-security-stateless/blob/master/LICENSE) [![JitPack](https://jitpack.io/v/AusDTO/spring-security-stateless.svg)](https://jitpack.io/#AusDTO/spring-security-stateless)
 
 Provides cookie-based implementations of SecurityContextRepository, CsrfTokenRepository, and RequestCache.
 
