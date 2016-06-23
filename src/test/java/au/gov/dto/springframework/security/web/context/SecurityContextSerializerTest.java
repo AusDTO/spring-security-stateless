@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.jackson2.UserDeserializer;
 
 import javax.servlet.http.Cookie;
 import java.util.Base64;

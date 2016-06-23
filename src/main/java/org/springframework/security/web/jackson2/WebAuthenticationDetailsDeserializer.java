@@ -167,6 +167,14 @@ public class WebAuthenticationDetailsDeserializer extends JsonDeserializer<WebAu
                         return 0;
                     }
 
+                    /**
+                     *
+                     * @deprecated As of Version 2.1, this method is
+                     *			deprecated and has no replacement.
+                     *			It will be removed in a future
+                     *			version of the Java Servlet API.
+                     *
+                     */
                     @Override
                     public HttpSessionContext getSessionContext() {
                         return null;
@@ -177,6 +185,17 @@ public class WebAuthenticationDetailsDeserializer extends JsonDeserializer<WebAu
                         return null;
                     }
 
+                    /**
+                     * @deprecated As of Version 2.2, this method is
+                     * 			replaced by {@link #getAttribute}.
+                     *
+                     * @param name        a string specifying the name of the object
+                     *
+                     * @return the object with the specified name
+                     *
+                     * @exception IllegalStateException    if this method is called on an
+                     *					invalidated session
+                     */
                     @Override
                     public Object getValue(String name) {
                         return null;
@@ -187,6 +206,18 @@ public class WebAuthenticationDetailsDeserializer extends JsonDeserializer<WebAu
                         return null;
                     }
 
+                    /**
+                     * @deprecated As of Version 2.2, this method is
+                     * 			replaced by {@link #getAttributeNames}
+                     *
+                     * @return an array of <code>String</code>
+                     *					objects specifying the
+                     *					names of all the objects bound to
+                     *					this session
+                     *
+                     * @exception IllegalStateException    if this method is called on an
+                     *					invalidated session
+                     */
                     @Override
                     public String[] getValueNames() {
                         return new String[0];
@@ -197,6 +228,18 @@ public class WebAuthenticationDetailsDeserializer extends JsonDeserializer<WebAu
 
                     }
 
+                    /**
+                     * @deprecated As of Version 2.2, this method is
+                     * 			replaced by {@link #setAttribute}
+                     *
+                     * @param name            the name to which the object is bound;
+                     *					cannot be null
+                     *
+                     * @param value            the object to be bound; cannot be null
+                     *
+                     * @exception IllegalStateException    if this method is called on an
+                     *					invalidated session
+                     */
                     @Override
                     public void putValue(String name, Object value) {
 
@@ -207,6 +250,16 @@ public class WebAuthenticationDetailsDeserializer extends JsonDeserializer<WebAu
 
                     }
 
+                    /**
+                     * @deprecated As of Version 2.2, this method is
+                     * 			replaced by {@link #removeAttribute}
+                     *
+                     * @param name                the name of the object to
+                     *						remove from this session
+                     *
+                     * @exception IllegalStateException    if this method is called on an
+                     *					invalidated session
+                     */
                     @Override
                     public void removeValue(String name) {
 
@@ -244,6 +297,13 @@ public class WebAuthenticationDetailsDeserializer extends JsonDeserializer<WebAu
                 return false;
             }
 
+            /**
+             *
+             * @deprecated As of Version 2.1 of the Java Servlet
+             *				API, use {@link #isRequestedSessionIdFromURL}
+             *				instead.
+             *
+             */
             @Override
             public boolean isRequestedSessionIdFromUrl() {
                 return false;
@@ -394,6 +454,10 @@ public class WebAuthenticationDetailsDeserializer extends JsonDeserializer<WebAu
                 return null;
             }
 
+            /**
+             * @deprecated As of Version 2.1 of the Java Servlet API,
+             * 			use {@link ServletContext#getRealPath} instead.
+             */
             @Override
             public String getRealPath(String path) {
                 return null;

@@ -2,7 +2,6 @@ package au.gov.dto.springframework.security.sample.config;
 
 import au.gov.dto.servlet.NoHttpSessionFilter;
 import au.gov.dto.servlet.http.HttpSessionCreatedListener;
-import au.gov.dto.springframework.security.sample.user.UserDeserializer;
 import au.gov.dto.springframework.security.web.context.CookieSecurityContextRepository;
 import au.gov.dto.springframework.security.web.context.JwtUserDetailsSerializer;
 import au.gov.dto.springframework.security.web.context.SecurityContextSerializer;
@@ -18,6 +17,7 @@ import org.springframework.boot.context.embedded.ServletListenerRegistrationBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.jackson2.UserDeserializer;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 
 import javax.servlet.http.HttpSessionListener;

@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.jackson2.UserDeserializer;
 import org.springframework.security.web.context.HttpRequestResponseHolder;
 import org.springframework.security.web.csrf.CsrfToken;
 
