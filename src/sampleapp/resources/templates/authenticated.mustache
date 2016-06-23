@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang=en>
+<head>
+    <meta charset=utf-8>
+    <title>Authenticated page</title>
+</head>
+<body>
+<h1>Authenticated page</h1>
+<p><a href="/">Unauthenticated page</a></p>
+<p>
+<form action="logout" method="post">
+    <input name="{{csrf.parameterName}}" type="hidden" value="{{csrf.token}}"/>
+    <input type="submit" value="Logout"/>
+</form>
+</p>
+</body>
+</html>

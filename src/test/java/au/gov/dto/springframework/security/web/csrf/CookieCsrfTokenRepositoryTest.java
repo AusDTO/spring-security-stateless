@@ -17,20 +17,22 @@ import static org.junit.Assert.assertNotNull;
 public class CookieCsrfTokenRepositoryTest {
     @Test
     public void testSaveAndLoadToken() throws Exception {
-        CookieCsrfTokenRepository repo = new CookieCsrfTokenRepository();
+        CookieCsrfTokenRepository csrfTokenRepository = new CookieCsrfTokenRepository();
+        String csrfCookieName = "csrfCookie";
+        csrfTokenRepository.setCsrfCookieName(csrfCookieName);
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
-        CsrfToken token = repo.generateToken(request);
-        repo.saveToken(token, request, response);
+        CsrfToken token = csrfTokenRepository.generateToken(request);
+        csrfTokenRepository.saveToken(token, request, response);
 
-        Cookie cookie = response.getCookie(token.getParameterName());
+        Cookie cookie = response.getCookie(csrfCookieName);
         assertNotNull(cookie);
         assertEquals(token.getToken(), cookie.getValue());
         assertEquals(true, cookie.isHttpOnly());
 
         request.setCookies(cookie);
 
-        CsrfToken saved = repo.loadToken(request);
+        CsrfToken saved = csrfTokenRepository.loadToken(request);
         assertEquals(token.getToken(), saved.getToken());
         assertEquals(token.getHeaderName(), saved.getHeaderName());
         assertEquals(token.getParameterName(), saved.getParameterName());

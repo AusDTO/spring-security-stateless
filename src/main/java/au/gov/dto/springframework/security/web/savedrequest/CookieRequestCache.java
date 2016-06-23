@@ -19,7 +19,7 @@ public class CookieRequestCache implements RequestCache {
     private final Base64.Encoder base64Encoder = Base64.getMimeEncoder(Integer.MAX_VALUE, new byte[]{'\n'});
     private final Base64.Decoder base64Decoder = Base64.getMimeDecoder();
 
-    private String savedRequestCookieName = "_savedrequest";
+    private String savedRequestCookieName = "savedrequest";
     private String savedRequestCookiePath = null;
     private int savedRequestCookieMaxAgeSeconds = -1;  // default to session cookie (non-persistent)
 
