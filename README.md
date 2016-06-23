@@ -27,7 +27,7 @@ See the sample Spring Boot application in the `src/sampleapp` directory for an e
 
 ## Add to your build
 
-Check the Releases tab for the latest version. 
+Check the [Releases](spring-security-stateless/releases) tab for the latest version. 
 
 ### Gradle
 
@@ -42,7 +42,7 @@ Then add the dependency:
 
     dependencies {
         ...
-        compile 'com.github.AusDTO:spring-security-stateless:1.0.4'
+        compile 'com.github.AusDTO:spring-security-stateless:1.1.0'
     }
 
 ### Maven
@@ -62,7 +62,7 @@ Then add the dependency:
     <dependency>
         <groupId>com.github.AusDTO</groupId>
         <artifactId>spring-security-stateless</artifactId>
-        <version>1.0.4</version>
+        <version>1.1.0</version>
     </dependency>
 
 ### sbt or Leiningen
@@ -75,4 +75,4 @@ Instructions coming soon. In the meantime, see the example application in the di
 
 ### API documentation
 
-[Javadoc](https://jitpack.io/com/github/AusDTO/spring-security-stateless/v1.0.4/javadoc/index.html)
+[Javadoc](https://jitpack.io/com/github/AusDTO/spring-security-stateless/v1.1.0/javadoc/index.html)
