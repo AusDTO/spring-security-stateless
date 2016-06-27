@@ -1,4 +1,4 @@
-package au.gov.dto.servlet;
+package au.gov.dto.servlet.http;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
