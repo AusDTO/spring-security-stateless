@@ -42,7 +42,7 @@ Then add the dependency:
 
     dependencies {
         ...
-        compile 'com.github.AusDTO:spring-security-stateless:1.1.2'
+        compile 'com.github.AusDTO:spring-security-stateless:1.1.3'
     }
 
 ### Maven
@@ -62,7 +62,7 @@ Then add the dependency:
     <dependency>
         <groupId>com.github.AusDTO</groupId>
         <artifactId>spring-security-stateless</artifactId>
-        <version>1.1.2</version>
+        <version>1.1.3</version>
     </dependency>
 
 ### sbt or Leiningen
@@ -89,4 +89,4 @@ Alternatively you can use the following Java code:
 
 ### API documentation
 
-[Javadoc](https://jitpack.io/com/github/AusDTO/spring-security-stateless/v1.1.2/javadoc/index.html)
+[Javadoc](https://jitpack.io/com/github/AusDTO/spring-security-stateless/v1.1.3/javadoc/index.html)
