@@ -23,4 +23,5 @@ deployment:
       - curl -kjLo ghr.zip https://github.com/tcnksm/ghr/releases/download/v0.4.0/ghr_v0.4.0_linux_amd64.zip
       - unzip ghr.zip
       - ./ghr -t $GITHUB_ACCESS_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME $CIRCLE_TAG release/
-      - curl -ikjL https://jitpack.io/api/builds/com.github.AusDTO/spring-security-stateless/$CIRCLE_TAG
+      - "curl -skL -o /dev/null -c jitpack_cookie.txt https://jitpack.io"
+      - "curl -skiL -H 'Referer: https://jitpack.io/' -b jitpack_cookie.txt https://jitpack.io/api/builds/com.github.AusDTO/spring-security-stateless/${$CIRCLE_TAG}"
