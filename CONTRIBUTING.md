@@ -32,4 +32,6 @@ We welcome pull requests from everyone. By participating in this project, you ag
 
 13. [Submit a pull request](https://github.com/AusDTO/spring-security-stateless/compare/).
 
-14. Wait patiently for a response. 
+14. [CircleCI](https://circleci.com/) should pick up your change and trigger a build. Ensure it passes. If it fails, go to step 5. 
+
+15. Wait patiently for a response.
