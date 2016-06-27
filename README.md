@@ -67,7 +67,7 @@ Then add the dependency:
 
 ### sbt or Leiningen
 
-See <https://jitpack.io/> for instructions
+See [JitPack.io](https://jitpack.io/#AusDTO/spring-security-stateless) for instructions
 
 ## How to use
 
