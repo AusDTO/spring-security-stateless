@@ -24,7 +24,7 @@ We welcome pull requests from everyone. By participating in this project, you ag
 
 9. If [FindBugs](http://findbugs.sourceforge.net/) catches problems, fix them.
 
-10. [Squash your commits](https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Squashing-Commits)
+10. [Squash your commits](https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Squashing-Commits).
 
 11. Write a [good commit message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
 
@@ -32,6 +32,6 @@ We welcome pull requests from everyone. By participating in this project, you ag
 
 13. [Submit a pull request](https://github.com/AusDTO/spring-security-stateless/compare/).
 
-14. [CircleCI](https://circleci.com/) should pick up your change and trigger a build. Ensure it passes. If it fails, go to step 5. 
+14. [CircleCI](https://circleci.com/gh/AusDTO/spring-security-stateless) should pick up your change and trigger a build. Ensure it passes. If it fails, go to step 5.
 
 15. Wait patiently for a response.
