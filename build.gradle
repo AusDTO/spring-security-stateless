@@ -26,8 +26,15 @@ configurations {
     sampleappCompile.extendsFrom compile
     sampleappRuntime.extendsFrom runtime
 
-    all*.exclude group: 'org.apache.tomcat.embed'      // Use Jetty instead
-    all*.exclude module: 'spring-boot-starter-tomcat'  // Use Jetty instead
+    sampleappCompile {
+        exclude group: 'org.apache.tomcat.embed'      // Use Jetty instead
+        exclude module: 'spring-boot-starter-tomcat'  // Use Jetty instead
+        exclude group: 'org.eclipse.jetty.websocket'  // No need for WebSocket support
+        exclude group: 'commons-logging'              // Use SLF4J with Logback instead
+        exclude group: 'log4j'                        // Use SLF4J with Logback instead
+        exclude module: 'slf4j-log4j12'               // Use SLF4J with Logback instead
+        exclude module: 'slf4j-simple'                // Use SLF4J with Logback instead
+    }
 }
 
 task run(type: JavaExec,
@@ -47,7 +54,6 @@ jar {
                 'Implementation-Vendor-Id': "com.github.${System.env.CIRCLE_PROJECT_USERNAME}",
                 'Implementation-Vendor': "${System.env.CIRCLE_PROJECT_USERNAME}",
                 'Implementation-URL': "${System.env.CIRCLE_REPOSITORY_URL}",
-                'Built-By': "${System.env.CIRCLE_USERNAME}",
                 'Build-URL': "${System.env.CIRCLE_BUILD_URL}",
                 'Build-Jdk': "${System.properties['java.version']}"
     }
@@ -95,7 +101,7 @@ dependencies {
     compile 'org.springframework.security:spring-security-web:3.2.0.RELEASE',
             'com.fasterxml.jackson.core:jackson-databind:2.1.0',
             'javax.servlet:javax.servlet-api:3.0.1',
-            'com.nimbusds:nimbus-jose-jwt:4.19'
+            'com.nimbusds:nimbus-jose-jwt:4.20'
 
     sampleappCompile 'org.springframework.boot:spring-boot-starter-security:1.3.5.RELEASE',
             'org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE',
@@ -104,9 +110,9 @@ dependencies {
 
     testCompile 'junit:junit:4.12',
             'org.hamcrest:hamcrest-library:1.3',
-            'org.springframework:spring-test:3.2.0.RELEASE',
+            'org.springframework:spring-test:3.2.6.RELEASE',
             'org.skyscreamer:jsonassert:1.3.0',
-            'org.mockito:mockito-core:2.0.70-beta',
+            'org.mockito:mockito-core:2.0.73-beta',
             'org.assertj:assertj-core:3.4.1',
             'com.fasterxml.jackson.core:jackson-databind:2.5.0'
 }
