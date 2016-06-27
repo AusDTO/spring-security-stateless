@@ -73,6 +73,20 @@ See <https://jitpack.io/> for instructions
 
 Instructions coming soon. In the meantime, see the example application in the directory `src/sampleapp`.
 
+### Generating a key for encrypting and signing 
+
+To generate a key for encrypting and signing use this command on Unix and macOS:
+
+    openssl rand 32 | base64
+
+Alternatively you can use the following Java code:
+ 
+    java.security.SecureRandom secureRandom = new java.security.SecureRandom();
+    byte[] key = new byte[32];
+    secureRandom.nextBytes(key);
+    String encodedKey = java.util.Base64.getEncoder().encodeToString(key);
+    System.out.println(encodedKey);
+
 ### API documentation
 
 [Javadoc](https://jitpack.io/com/github/AusDTO/spring-security-stateless/v1.1.0/javadoc/index.html)
