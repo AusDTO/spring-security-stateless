@@ -4,7 +4,7 @@
 
 ## tl;dr
 
-Use Spring Security for authentication in your JVM-based application without using HttpSession, eliminating server-side non-persistent user session state.
+This library provides cookie-based implementations of SecurityContextRepository, CsrfTokenRepository, and RequestCache for Spring Security. This allows you to use Spring Security for authentication in your JVM-based application without using HttpSession, eliminating server-side non-persistent user state and simplifying deployments.
 
 ## Explanation
 
@@ -17,6 +17,8 @@ Performing application deployments without disrupting end users becomes trickier
 This library allows you to use [Spring Security](http://projects.spring.io/spring-security/) for authentication without using HttpSession. Authentication state is kept in an encrypted and signed cookie instead. Specificially, this library provides cookie-based implementations of `SecurityContextRepository`, `CsrfTokenRepository`, and `RequestCache`. These can be used all together or independently.
 
 See the sample Spring Boot application in the `src/sampleapp` directory for an example of an application using all three implementations and not using HttpSession at all.
+
+This library has been extracted from an application that has been using it in production since January 2016: [AusDTO/citizenship-appointment-server](https://github.com/AusDTO/citizenship-appointment-server)
 
 ## Requirements
 
