@@ -1,6 +1,5 @@
 package au.gov.dto.springframework.security.web.savedrequest;
 
-import org.springframework.security.web.savedrequest.PublicSavedRequestAwareWrapper;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -32,8 +31,7 @@ public class CookieRequestCache implements RequestCache {
                     .scheme(request.isSecure() ? "https" : "http")
                     .host(requestUri.getHost())
                     .path(requestUri.getPath())
-                    .query(requestUri.getQuery())
-                    .fragment(requestUri.getFragment());
+                    .query(request.getQueryString());
             if ((request.isSecure() && requestUri.getPort() != 443) || (!request.isSecure() && requestUri.getPort() != 80)) {
                 uriComponentsBuilder.port(requestUri.getPort());
             }
@@ -55,7 +53,7 @@ public class CookieRequestCache implements RequestCache {
         if (request.getCookies() == null) {
             return null;
         }
-        Optional<Cookie> maybeCookie = Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals(savedRequestCookieName)).findFirst();
+        Optional<Cookie> maybeCookie = Arrays.stream(request.getCookies()).filter(cookie -> cookie != null && savedRequestCookieName.equals(cookie.getName())).findFirst();
         if (!maybeCookie.isPresent()) {
             return null;
         }
@@ -66,12 +64,10 @@ public class CookieRequestCache implements RequestCache {
 
     @Override
     public HttpServletRequest getMatchingRequest(HttpServletRequest request, HttpServletResponse response) {
-        SavedRequest savedRequest = getRequest(request, response);
-        if (savedRequest == null) {
-            return null;
+        if (getRequest(request, response) != null) {
+            removeRequest(request, response);
         }
-        removeRequest(request, response);
-        return new PublicSavedRequestAwareWrapper(savedRequest, request);
+        return null;
     }
 
     @Override
