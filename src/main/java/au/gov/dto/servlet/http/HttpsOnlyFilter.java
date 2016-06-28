@@ -1,5 +1,7 @@
 package au.gov.dto.servlet.http;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -22,6 +24,8 @@ import java.net.URISyntaxException;
  * the proxied application of the protocol used by the client request.
  */
 public class HttpsOnlyFilter implements Filter {
+    private final Log logger = LogFactory.getLog(this.getClass());
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
@@ -32,6 +36,7 @@ public class HttpsOnlyFilter implements Filter {
         String forwardedProtocolHeader = request.getHeader("x-forwarded-proto");
         if ("http".equalsIgnoreCase(forwardedProtocolHeader)) {
             String redirectUrl = getRedirectUrl(request);
+            logger.debug("Redirecting " + request.getRequestURL().toString() + " to " + redirectUrl + " to force https");
             ((HttpServletResponse) servletResponse).sendRedirect(redirectUrl);
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
@@ -42,7 +47,7 @@ public class HttpsOnlyFilter implements Filter {
     public void destroy() {
     }
 
-    String getRedirectUrl(HttpServletRequest request) {
+    protected String getRedirectUrl(HttpServletRequest request) {
         String requestUrl = request.getRequestURL().toString();
         try {
             URI uri = new URI(requestUrl);
