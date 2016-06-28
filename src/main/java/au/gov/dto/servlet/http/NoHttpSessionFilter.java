@@ -21,13 +21,13 @@ public class NoHttpSessionFilter implements Filter {
         filterChain.doFilter(new HttpServletRequestWrapper((HttpServletRequest) request) {
             @Override
             public HttpSession getSession() {
-                throw new RuntimeException("HttpSession should not be used");
+                throw new UnsupportedOperationException("getSession() is not supported");
             }
 
             @Override
             public HttpSession getSession(boolean create) {
                 if (create) {
-                    throw new RuntimeException("HttpSession should not be used");
+                    throw new UnsupportedOperationException("getSession(true) is not supported");
                 }
                 return null;
             }
