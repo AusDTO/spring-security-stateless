@@ -14,13 +14,14 @@ public class HttpSessionCreatedListener implements HttpSessionListener {
     public void sessionCreated(HttpSessionEvent event) {
         String stackTrace = StringUtils.arrayToDelimitedString(Thread.currentThread().getStackTrace(), " ");
         logger.warn("HttpSession was created: " + stackTrace);
-        if (event.getSession() != null) {
-            try {
-                logger.warn("Invalidating unexpected HttpSession");
-                event.getSession().invalidate();
-            } catch (IllegalStateException e) {
-                logger.warn("Could not invalidate already invalidated HttpSession", e);
-            }
+        if (event.getSession() == null) {
+            return;
+        }
+        try {
+            logger.warn("Invalidating unexpected HttpSession");
+            event.getSession().invalidate();
+        } catch (IllegalStateException e) {
+            logger.warn("Could not invalidate already invalidated HttpSession", e);
         }
     }
 
