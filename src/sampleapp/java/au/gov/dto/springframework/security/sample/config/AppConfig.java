@@ -1,7 +1,8 @@
 package au.gov.dto.springframework.security.sample.config;
 
-import au.gov.dto.servlet.http.NoHttpSessionFilter;
 import au.gov.dto.servlet.http.HttpSessionCreatedListener;
+import au.gov.dto.servlet.http.HttpsOnlyFilter;
+import au.gov.dto.servlet.http.NoHttpSessionFilter;
 import au.gov.dto.springframework.security.web.context.CookieSecurityContextRepository;
 import au.gov.dto.springframework.security.web.context.JwtEncryption;
 import au.gov.dto.springframework.security.web.csrf.CookieCsrfTokenRepository;
@@ -53,5 +54,13 @@ class AppConfig {
     @Bean
     CookieRequestCache cookieRequestCache() {
         return new CookieRequestCache();
+    }
+
+    @Bean
+    FilterRegistrationBean httpsOnlyFilter() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(new HttpsOnlyFilter());
+        registration.addUrlPatterns("/*");
+        return registration;
     }
 }
