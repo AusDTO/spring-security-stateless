@@ -50,7 +50,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
             .formLogin()
                 .successHandler(new CookieSavedRequestAwareAuthenticationSuccessHandler(requestCache))
-                .failureHandler(new StatelessSimpleUrlAuthenticationFailureHandler())
+                .failureHandler(new StatelessSimpleUrlAuthenticationFailureHandler("/login?error"))
                 .permitAll()
                 .and()
             .logout()
