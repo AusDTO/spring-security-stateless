@@ -21,10 +21,12 @@ import java.security.SecureRandom;
  * https://github.com/cloudfoundry/uaa/blob/41dba9d81dbdf24ede4fb9719de28b1b88b3e1b4/common/src/main/java/org/cloudfoundry/identity/uaa/web/CookieBasedCsrfTokenRepository.java
  */
 public class CookieCsrfTokenRepository implements CsrfTokenRepository {
+    public static final String DEFAULT_CSRF_COOKIE_NAME = "csrf";
+
     private SecureRandom secureRandom = new SecureRandom();
     private String csrfHeaderName = "X-CSRF-TOKEN";
     private String csrfParameterName = "_csrf";
-    private String csrfCookieName = "csrf";
+    private String csrfCookieName = DEFAULT_CSRF_COOKIE_NAME;
     private String csrfCookiePath = null;
     private int csrfCookieMaxAgeSeconds = -1;  // default to session cookie (non-persistent)
 

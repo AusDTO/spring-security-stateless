@@ -15,10 +15,12 @@ import java.util.Base64;
 import java.util.Optional;
 
 public class CookieRequestCache implements RequestCache {
+    public static final String DEFAULT_SAVEDREQUEST_COOKIE_NAME = "savedrequest";
+
     private final Base64.Encoder base64Encoder = Base64.getMimeEncoder(Integer.MAX_VALUE, new byte[]{'\n'});
     private final Base64.Decoder base64Decoder = Base64.getMimeDecoder();
 
-    private String savedRequestCookieName = "savedrequest";
+    private String savedRequestCookieName = DEFAULT_SAVEDREQUEST_COOKIE_NAME;
     private String savedRequestCookiePath = null;
     private int savedRequestCookieMaxAgeSeconds = -1;  // default to session cookie (non-persistent)
 

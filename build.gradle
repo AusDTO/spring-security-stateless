@@ -2,9 +2,8 @@ apply plugin: 'findbugs'
 apply plugin: 'java'
 apply plugin: 'maven-publish'
 
-def javaVersion = '1.8'
-sourceCompatibility = javaVersion
-targetCompatibility = javaVersion
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 
 group = 'com.github.AusDTO'
 version = 'git rev-parse --short=10 HEAD'.execute().getText().trim()
@@ -20,20 +19,24 @@ sourceSets {
             runtimeClasspath += main.output
         }
     }
+    sampleapptest {
+        java {
+            compileClasspath += sampleapp.output + main.output
+            runtimeClasspath += sampleapp.output + main.output
+        }
+    }
 }
 
 configurations {
     sampleappCompile.extendsFrom compile
     sampleappRuntime.extendsFrom runtime
 
+    sampleapptestCompile.extendsFrom sampleappCompile
+    sampleapptestRuntime.extendsFrom sampleappRuntime
+
     sampleappCompile {
         exclude group: 'org.apache.tomcat.embed'      // Use Jetty instead
         exclude module: 'spring-boot-starter-tomcat'  // Use Jetty instead
-        exclude group: 'org.eclipse.jetty.websocket'  // No need for WebSocket support
-        exclude group: 'commons-logging'              // Use SLF4J with Logback instead
-        exclude group: 'log4j'                        // Use SLF4J with Logback instead
-        exclude module: 'slf4j-log4j12'               // Use SLF4J with Logback instead
-        exclude module: 'slf4j-simple'                // Use SLF4J with Logback instead
     }
 }
 
@@ -42,6 +45,18 @@ task run(type: JavaExec,
         group: 'Application') {
     classpath = sourceSets.sampleapp.runtimeClasspath
     main = 'au.gov.dto.springframework.security.sample.Application'
+}
+
+task e2eTest(type: Test,
+        description: 'Runs the end-to-end tests against the sample application.',
+        group: 'Verification') {
+    testClassesDir = sourceSets.sampleapptest.output.classesDir
+    classpath = sourceSets.sampleapptest.runtimeClasspath
+}
+check.dependsOn e2eTest
+
+tasks.withType(Test) {
+    reports.html.destination = file("${reporting.baseDir}/${name}")
 }
 
 jar {
@@ -103,11 +118,6 @@ dependencies {
             'javax.servlet:javax.servlet-api:3.0.1',
             'com.nimbusds:nimbus-jose-jwt:4.20'
 
-    sampleappCompile 'org.springframework.boot:spring-boot-starter-security:1.3.5.RELEASE',
-            'org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE',
-            'org.springframework.boot:spring-boot-starter-jetty:1.3.5.RELEASE',
-            'org.springframework.boot:spring-boot-starter-mustache:1.3.5.RELEASE'
-
     testCompile 'junit:junit:4.12',
             'org.hamcrest:hamcrest-library:1.3',
             'org.springframework:spring-test:3.2.6.RELEASE',
@@ -115,6 +125,15 @@ dependencies {
             'org.mockito:mockito-core:2.0.73-beta',
             'org.assertj:assertj-core:3.4.1',
             'com.fasterxml.jackson.core:jackson-databind:2.5.0'
+
+    sampleappCompile 'org.springframework.boot:spring-boot-starter-security:1.3.5.RELEASE',
+            'org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE',
+            'org.springframework.boot:spring-boot-starter-jetty:1.3.5.RELEASE',
+            'org.springframework.boot:spring-boot-starter-mustache:1.3.5.RELEASE'
+
+    sampleapptestCompile 'net.sourceforge.htmlunit:htmlunit:2.22',
+            'junit:junit:4.12',
+            'org.hamcrest:hamcrest-library:1.3'
 }
 
 findbugs {
@@ -135,4 +154,3 @@ task wrapper(type: Wrapper,
         group: 'Build Setup') {
     gradleVersion = '2.14'
 }
-

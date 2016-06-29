@@ -19,10 +19,12 @@ import java.util.Optional;
  * https://github.com/oakfusion/spring-cookie-session/blob/spring-cookie-session-1.0/src/main/java/com/oakfusion/security/CookieSecurityContextRepository.java
  */
 public class CookieSecurityContextRepository implements SecurityContextRepository {
+    public static final String DEFAULT_AUTHENTICATION_COOKIE_NAME = "authentication";
+
     private final TokenEncryption tokenEncryption;
 
     private AuthenticationSerializer authenticationSerializer = new JsonAuthenticationSerializer();
-    private String authenticationCookieName = "authentication";
+    private String authenticationCookieName = DEFAULT_AUTHENTICATION_COOKIE_NAME;
     private String authenticationCookiePath = null;
     private int authenticationCookieMaxAgeSeconds = 3600;
 
