@@ -54,9 +54,15 @@ task e2eTest(type: Test,
     classpath = sourceSets.sampleapptest.runtimeClasspath
 }
 check.dependsOn e2eTest
+e2eTest.shouldRunAfter test
 
 tasks.withType(Test) {
     reports.html.destination = file("${reporting.baseDir}/${name}")
+
+    testLogging {
+        exceptionFormat = 'full'
+//        showStandardStreams = true
+    }
 }
 
 jar {
