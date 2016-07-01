@@ -44,7 +44,7 @@ Then add the dependency:
 
     dependencies {
         ...
-        compile 'com.github.AusDTO:spring-security-stateless:1.2.3'
+        compile 'com.github.AusDTO:spring-security-stateless:v1.2.3'
     }
 
 ### Maven
@@ -64,7 +64,7 @@ Then add the dependency:
     <dependency>
         <groupId>com.github.AusDTO</groupId>
         <artifactId>spring-security-stateless</artifactId>
-        <version>1.2.3</version>
+        <version>v1.2.3</version>
     </dependency>
 
 ### sbt or Leiningen
